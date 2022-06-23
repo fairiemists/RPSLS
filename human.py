@@ -6,5 +6,8 @@ class Human(Player):
 
 
     def choose_gesture(self): 
-        pass
+        print()
+        self.current_gesture = input(f"Enter your gesture choice: ")
+        print(f"{self.name} picked {self.gestures[int(self.current_gesture)]}")
+        
     

@@ -3,19 +3,38 @@ from ai import AI
 
 
 class Game: 
-    def __init__(self, name) -> None:
+    def __init__(self, name):
         self.name = name
-        self.player_one = ()
-        self.player_two = ()
+        self.player_one = None
+        self.player_two = None
 
 
     def welcome():
         # general rules
+        print(f"Welcome to Rock, Paper, Scissors, Lizard, Spock.")
+        print()
+        print(f"Each game will have three rounds.")
+        print(f"First player to win two rounds wins the game.")
+        print()
+        print(f"Keep in mind...")
+        print()
         # list of what beats what
-        pass
+        print(f"Rock crushes Scissors")
+        print(f"Scissors cuts Paper")
+        print(f"Paper covers Rock")
+        print(f"Rock crushes Lizard")
+        print(f"Lizard poisons Spock")
+        print(f"Spock smashes Scissors")
+        print(f"Scissors decapitates Lizard")
+        print(f"Lizard eats Paper")
+        print(f"Paper disproves Spock")
+        print(f"Spock vaporizes Rock")
+        print()
+
 
     def player_choice():
         # 0, 1, 2
+        number_of_players = input("How many players? ")
         #create players
         pass
 
@@ -26,6 +45,7 @@ class Game:
         #display gesture choices
         #display round winner (or tie)
         #change score
+        #next round prompt?
         pass
 
     def winner_check():

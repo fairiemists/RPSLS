@@ -1,4 +1,3 @@
-from sunau import AUDIO_FILE_ENCODING_LINEAR_16
 from human import Human
 from ai import AI
 
@@ -55,25 +54,104 @@ class Game:
         else: 
             print("I did not understand that response. Please choose from the following options.")
             return self.player_choice()
+        pass
+
+
 
 
     def choose_gesture(self):
-        #different functions for player 1 & 2? ...I don't think so.
-        #pull from Human or AI
-        #display round winner (or tie)
-        #change score
-        #next round prompt?
+
+        self.player_one.choose_gesture()
+        self.player_two.choose_gesture()
+
+        if self.player_one.current_gesture == self.player_two.current_gesture:
+            print(f"It's a tie! Both players picked {self.player_one.current_gesture}. ")
+
+        elif self.player_one.current_gesture == self.player_one.gestures[0]: #Rock
+            if self.player_two.current_gesture == self.player_two.gestures[1]:
+                print(f"Paper covers Rock. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[2]:
+                print(f"Rock crushes Scissors. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[3]:
+                print(f"Rock crushes Lizard. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[4]:
+                print(f"Spock vaporizes Rock. Player Two wins!")
+                self.player_two.score += 1
+
+        elif self.player_one.current_gesture == self.player_one.gestures[1]: #Paper
+            if self.player_two.current_gesture == self.player_two.gestures[0]:
+                print(f"Paper covers Rock. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[2]:
+                print(f"Scissors cuts Paper. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[3]:
+                print(f"Lizard eats Paper. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[4]:
+                print(f"Paper disproves Spock. Player One wins!")
+                self.player_one.score += 1
+
+        elif self.player_one.current_gesture == self.player_one.gestures[2]: #Scissors
+            if self.player_two.current_gesture == self.player_two.gestures[0]:
+                print(f"Rock crushes Scissors. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[1]:
+                print(f"Scissors cuts Paper. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[3]:
+                print(f"Scissors decapitates Lizard. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[4]:
+                print(f"Spock smashes Scissors. Player Two wins!")
+                self.player_two.score += 1
+
+        elif self.player_one.current_gesture == self.player_one.gestures[3]: #Lizard
+            if self.player_two.current_gesture == self.player_two.gestures[0]: #Rock
+                print(f"Rock crushes Lizard. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[1]: #Paper
+                print(f"Lizard eats Paper. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[2]: #Scissors
+                print(f"Scissors decapitates Lizard. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[4]: #Spock
+                print(f"Lizard poisons Spock. Player One wins!")
+                self.player_one.score += 1
+
+        elif self.player_one.current_gesture == self.player_one.gestures[4]: #Spock
+            if self.player_two.current_gesture == self.player_two.gestures[0]: #Rock
+                print(f"Spock vaporizes Rock. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[1]: #Paper
+                print(f"Paper disproves Spock. Player Two wins!")
+                self.player_two.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[2]: #Scissors
+                print(f"Spock smashes Scissors. Player One wins!")
+                self.player_one.score += 1
+            elif self.player_two.current_gesture == self.player_two.gestures[3]: #Lizard
+                print(f"Lizard poisons Spock. Player Two wins!")
+                self.player_two.score += 1
+        
+        print()
+        print(f"Player One's score is {self.player_one.score}.")
+        print(f"Player Two's score is {self.player_two.score}.")
+        print()
+
         pass
 
-    def winner_check(self):
-        #check for game winner
-            #is player wins at least 2 and more than the other player?
-                #YES: Announce winner. Move on to Big Hooray.
-                #NO: Go to gesture_codes then repeat choose_gesture.        # 
-        pass
 
     def big_hooray(self):
-        #offer to play again
+        print(f"Hooray!")
+        if self.player_one.score >= 2:
+            print(f"Player One wins the game!")
+        elif self.player_two.score >= 2:
+            print(f"Player Two wins the game!")
+
         pass
 
     def run_game(self):
@@ -81,3 +159,18 @@ class Game:
         self.welcome()
         print()
         self.player_choice()
+
+        while self.player_one.score <= 2 and self.player_two.score <=2:
+            self.choose_gesture()
+        print()
+        self.big_hooray()
+
+        print()
+        user_input = input("Would you like to play again? y/n ")
+        print()
+        if user_input == "y":
+            self.run_game()
+        
+        pass
+
+

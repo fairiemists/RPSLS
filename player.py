@@ -8,10 +8,6 @@ class Player:
         self.current_gesture = None
 
 
-    def choose_gesture(self): 
-        
-
-        pass
 
 
 

@@ -20,6 +20,7 @@ class Human(Player):
         print(f"Press 5 for {self.gestures[4]}")
         time.sleep( 0.5 )
         print()
+        
         user_input = input(f"Enter your gesture choice: ")
         if user_input == "1":
             self.current_gesture = self.gestures[0]
